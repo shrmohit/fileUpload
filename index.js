@@ -20,9 +20,11 @@ const connectdb = require('./config/database.js');
 const localFileUploadRoute = require('./router/localFileUpload.router.js');
 const {
   fileToCloudinary,
+  videoToCloudinary,
 } = require('./controller/localFileUpload.controller.js');
 app.use('/api/v1/users', localFileUploadRoute);
 app.use('/api/v1/users', fileToCloudinary);
+app.use('/api/v1/users', videoToCloudinary);
 
 // cloudinary
 const cloudinary = require('./config/cloudinary.js');
