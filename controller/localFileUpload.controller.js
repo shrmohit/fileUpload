@@ -83,6 +83,7 @@ exports.fileToCloudinary = async (req, res) => {
   return res.status(200).json({
     message: 'Image Upload Successfully',
     success: true,
+    response,
   });
 };
 
@@ -121,6 +122,7 @@ exports.videoToCloudinary = async (req, res) => {
     return res.status(200).json({
       message: 'Video Upload',
       success: true,
+      response,
     });
   } catch (error) {
     console.log(error);
