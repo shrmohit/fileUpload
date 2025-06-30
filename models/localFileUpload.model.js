@@ -41,7 +41,7 @@ localFileUploadSchema.post('save', async function (doc) {
       from: `codehelp`,
       to: doc.email,
       subject: 'New file upload on cloudinary',
-      html: `<h2>Hello jee</h2> <p>File Upload</p>`,
+      html: `<h2>Hello jee</h2> <p>File Upload view here : <a href="${doc.file}">${doc.file}</a> </p>`,
     });
 
     console.log('info', info);

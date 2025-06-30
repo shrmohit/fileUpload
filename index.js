@@ -5,31 +5,39 @@ const app = express();
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const fileUpload = require('express-fileupload');
-app.use(
-  fileUpload({
-    useTempFiles: true,
-    tempFileDir: '/tmp/',
-  })
-);
+// const fileUpload = require('express-fileupload');
+// app.use(
+//   fileUpload({
+//     useTempFiles: true,
+//     tempFileDir: '/tmp/',
+//   })
+// );
 
 // database connection
 const connectdb = require('./config/database.js');
 
 // routes
-const localFileUploadRoute = require('./router/localFileUpload.router.js');
-const {
-  fileToCloudinary,
-  videoToCloudinary,
-} = require('./controller/localFileUpload.controller.js');
-app.use('/api/v1/users', localFileUploadRoute);
-app.use('/api/v1/users', fileToCloudinary);
-app.use('/api/v1/users', videoToCloudinary);
+// const localFileUploadRoute = require('./router/localFileUpload.router.js');
+// const {
+//   fileToCloudinary,
+//   videoToCloudinary,
+// } = require('./controller/localFileUpload.controller.js');
+// app.use('/api/v1/users', localFileUploadRoute);
+// app.use('/api/v1/users', fileToCloudinary);
+// app.use('/api/v1/users', videoToCloudinary);
+
+
 
 // cloudinary
 const cloudinary = require('./config/cloudinary.js');
 
 cloudinary.cloudinaryConnect();
+
+
+//multer use api
+// Note using multer for file and image upload
+const formuploadRouter = require("./router/formrouter")
+app.use("/api", formuploadRouter)
 
 // Server
 const PORT = process.env.PORT || 5000;

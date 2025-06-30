@@ -1,21 +1,22 @@
-const { formModel } = require("../models/form.model")
+const { formModel } = require("../models/form.model");
 
-export const formwithmulter = async (req, res) => {
-  const { name, image } = req.body
-  if (!name || !image) {
+const formwithmulter = async (req, res) => {
+  const { name } = req.body;
+  const file = req.file;
+  if (!name || !file) {
     return res.status(400).json({
-      message: "all fields required",
-      success: false
-    })
+      message: "All fields required",
+      success: false,
+    });
   }
 
-  const formdata = await formModel.create({
-    name, image
-  })
+  const formdata = await formModel.create({ name, image: file.filename, });
 
   return res.status(200).json({
-    message: "image upload",
+    message: "Image uploaded",
     success: true,
-    formdata
-  })
-}
+    formdata,
+  });
+};
+
+module.exports = { formwithmulter }; 
